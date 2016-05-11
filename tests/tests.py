@@ -2,6 +2,7 @@ import unittest
 
 import os
 from db.db import DB
+from settings import DATASET_TESTS_FILE
 from utils.csvfiles import read_csv_file
 
 __author__ = 'josebermudez'
@@ -14,13 +15,12 @@ class TestDB(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(TestDB, self).__init__(*args, **kwargs)
-        self.filename = os.path.join(here, 'search_dataset_test.csv')
 
     def test_db_create(self):
         """
         Test DB. Create DB
         """
-        db = DB(filename=self.filename)
+        db = DB(filename=DATASET_TESTS_FILE)
         self.assertIsNotNone(db.model)
 
     def test_db_create_filename_none(self):
@@ -40,13 +40,12 @@ class TestCSVFiles(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(TestCSVFiles, self).__init__(*args, **kwargs)
-        self.filename = os.path.join(here, 'search_dataset_test.csv')
 
     def test_csvfiles_read_file(self):
         """
         Test CSV File. Read CSV file
         """
-        model = read_csv_file(filename=self.filename)
+        model = read_csv_file(filename=DATASET_TESTS_FILE)
         self.assertIsNotNone(model)
 
     def test_csvfiles_read_file_filename_none(self):
