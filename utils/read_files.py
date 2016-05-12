@@ -1,3 +1,4 @@
+# coding=utf-8
 import csv
 
 import codecs
@@ -21,14 +22,14 @@ def read_csv_file(filename):
     reader = csv.reader(codecs.open(filename, 'rU'))
 
     # model
-    model = {}
+    model = dict()
 
     # loop for rows in reader
-    for row in reader:
-        model[row[0]] = {
-            'name': row[1],
-            'brand': row[2]
-        }
+    for product_id, name, brand in reader:
+        model[product_id] = dict(
+            name=name,
+            brand=brand
+        )
 
     # Close file
     f_in.close()
@@ -37,6 +38,8 @@ def read_csv_file(filename):
 
 
 # TODO: problem with repeat IDs
+
+# TODO: ascii chars
 
 
 def read_queries_file(filename):
