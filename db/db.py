@@ -66,6 +66,9 @@ class DB(object):
         :param query:
         :return:
         """
+        if not query:
+            raise ValueError('The query is empty.')
+
         scores = []
 
         words = query.split()
@@ -77,7 +80,7 @@ class DB(object):
             scores[0] = dict(Counter(scores[0]) + Counter(item))
 
         # sort by score
-        query_score = sorted(scores[0].items(), key=operator.itemgetter(0))
+        query_score = sorted(scores[0].items(), key=operator.itemgetter(1), reverse=True)
 
         return query_score
 
