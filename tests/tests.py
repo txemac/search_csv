@@ -18,7 +18,7 @@ class TestDB(unittest.TestCase):
         Test DB. Create DB
         """
         db = DB(filename=DATASET_TESTS_FILE)
-        self.assertIsNotNone(db.model)
+        self.assertIsNotNone(db.products)
 
     def test_db_create_filename_none(self):
         """
@@ -31,6 +31,34 @@ class TestDB(unittest.TestCase):
         Test DB. Create DB, with invalid filename
         """
         self.assertRaises(IOError, DB, filename='error.csv')
+
+    def test_db_get_name_by_id(self):
+        """
+        Test DB. Get name by id
+        """
+        db = DB(filename=DATASET_TESTS_FILE)
+        self.assertEqual('Miso Beaded Bracelets Pack Multi Multi', db.get_name_by_id(product_id=785))
+
+    def test_db_get_name_by_id_invalid(self):
+        """
+        Test DB. Get name by id, with invalid id
+        """
+        db = DB(filename=DATASET_TESTS_FILE)
+        self.assertRaises(ValueError, db.get_name_by_id, product_id=1)
+
+    def test_db_get_brand_by_id(self):
+        """
+        Test DB. Get brand by id
+        """
+        db = DB(filename=DATASET_TESTS_FILE)
+        self.assertEqual('Miso', db.get_brand_by_id(product_id=785))
+
+    def test_db_get_brand_by_id_invalid(self):
+        """
+        Test DB. Get brand by id, with invalid id
+        """
+        db = DB(filename=DATASET_TESTS_FILE)
+        self.assertRaises(ValueError, db.get_brand_by_id, product_id=1)
 
 
 class TestCSVFiles(unittest.TestCase):
