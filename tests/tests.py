@@ -60,6 +60,24 @@ class TestDB(unittest.TestCase):
         db = DB(filename=DATASET_TESTS_FILE)
         self.assertRaises(ValueError, db.get_brand_by_id, product_id=1)
 
+    def test_get_products_by_query(self):
+        """
+        Test DB. Get products by query
+        """
+        db = DB(filename=DATASET_TESTS_FILE)
+        query = 'Multi'
+        result = db.get_products_by_query(query=query)
+        self.assertEqual(result, [('785', 50), ('8588', 30)], msg=result)
+
+    def test_get_products_by_query_no_match(self):
+        """
+        Test DB. Get products by query, with query without matchs
+        """
+        db = DB(filename=DATASET_TESTS_FILE)
+        query = 'aaaaaaa'
+        result = db.get_products_by_query(query=query)
+        self.assertEqual(result, [], msg=result)
+
 
 class TestCSVFiles(unittest.TestCase):
 
